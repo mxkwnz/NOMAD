@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nomad - Rent</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style_mc.css">
+</head>
+<body>
+  
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <img src="https://img.freepik.com/premium-vector/ninja-logo-icon-design_775854-2611.jpg"
+               alt="Nomad logo" class="logo-img me-2">
+          <span class="fw-bold text-light">Nomad</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link active" href="rent.html">Rent</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <button class="btn btn-dark floating-burger" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas">
+    ☰
+  </button>
+
+  <div class="offcanvas offcanvas-end text-bg-dark" id="menuOffcanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Nomad Menu</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column gap-3">
+      <a href="index.html" class="nav-link text-light">🏠 Home</a>
+      <a href="catalog.html" class="nav-link text-light">🚗 Catalog</a>
+      <a href="rent.html" class="nav-link text-light">🔑 Rent</a>
+      <a href="contact.html" class="nav-link text-light">📞 Contact</a>
+      <a href="typography.html" class="nav-link text-light">🔤 Typography Demo</a>
+      <a href="cards.html" class="nav-link text-light">🃏 Card Group Demo</a>
+    </div>
+  </div>
+
+  <main class="container py-4">
+    <section class="text-center mb-3">
+      <h1 class="h3 text-light">Rent a Car</h1>
+      <p class="text-secondary">Choose from our list below and book your car.</p>
+    </section>
+
+    <div id="rentCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active"><img src="Porsche 911.jpg" class="d-block w-100 carousel-img" alt="Porsche 911"></div>
+        <div class="carousel-item"><img src="BMW M5.jpg" class="d-block w-100 carousel-img" alt="BMW M5"></div>
+        <div class="carousel-item"><img src="Mercedes G63.jpg" class="d-block w-100 carousel-img" alt="Mercedes G63"></div>
+        <div class="carousel-item"><img src="Toyota Camry.jpg" class="d-block w-100 carousel-img" alt="Toyota Camry"></div>
+        <div class="carousel-item"><img src="Kia Sportage.jpg" class="d-block w-100 carousel-img" alt="Kia Sportage"></div>
+        <div class="carousel-item"><img src="Hyundai Tucson.jpg" class="d-block w-100 carousel-img" alt="Hyundai Tucson"></div>
+        <div class="carousel-item"><img src="Lexus ES.png" class="d-block w-100 carousel-img" alt="Lexus ES"></div>
+        <div class="carousel-item"><img src="Nissan X-Trail.jpg" class="d-block w-100 carousel-img" alt="Nissan X-Trail"></div>
+        <div class="carousel-item"><img src="Audi Q5.jpg" class="d-block w-100 carousel-img" alt="Audi Q5"></div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#rentCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></button>
+      <button class="carousel-control-next" type="button" data-bs-target="#rentCarousel" data-bs-slide="next"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></button>
+    </div>
+
+    <section class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
+      <div class="col">
+        <div class="card h-100">
+          <img src="Porsche 911.jpg" class="card-img-top" alt="Porsche 911">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">1. Porsche 911</h5>
+            <p class="card-text text-muted">Comfort · Automatic · 2021</p>
+            <p class="fw-bold mt-auto">$120/day</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="BMW M5.jpg" class="card-img-top" alt="BMW M5">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">2. BMW M5</h5>
+            <p class="card-text text-muted">Sport · Automatic · 2019</p>
+            <p class="fw-bold mt-auto">$140/day</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="Mercedes G63.jpg" class="card-img-top" alt="Mercedes G63">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">3. Mercedes G63</h5>
+            <p class="card-text text-muted">Luxury · Automatic · 2022</p>
+            <p class="fw-bold mt-auto">$200/day</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="Toyota Camry.jpg" class="card-img-top" alt="Toyota Camry">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">4. Toyota Camry</h5>
+            <p class="card-text text-muted">Comfort · Automatic · 2020</p>
+            <p class="fw-bold mt-auto">$50/day</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="Kia Sportage.jpg" class="card-img-top" alt="Kia Sportage">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">5. Kia Sportage</h5>
+            <p class="card-text text-muted">Family SUV · Automatic · 2018</p>
+            <p class="fw-bold mt-auto">$45/day</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col">
+        <div class="card h-100">
+          <img src="Hyundai Tucson.jpg" class="card-img-top" alt="Hyundai Tucson">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">6. Hyundai Tucson</h5>
+            <p class="card-text text-muted">SUV · Automatic · 2021</p>
+            <p class="fw-bold mt-auto">$48/day</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="Lexus ES.png" class="card-img-top" alt="Lexus ES">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">7. Lexus ES</h5>
+            <p class="card-text text-muted">Premium · Automatic · 2020</p>
+            <p class="fw-bold mt-auto">$95/day</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="Nissan X-Trail.jpg" class="card-img-top" alt="Nissan X-Trail">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">8. Nissan X-Trail</h5>
+            <p class="card-text text-muted">Off-road · Automatic · 2019</p>
+            <p class="fw-bold mt-auto">$52/day</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <img src="Audi Q5.jpg" class="card-img-top" alt="Audi Q5">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">9. Audi Q5</h5>
+            <p class="card-text text-muted">SUV · Automatic · 2022</p>
+            <p class="fw-bold mt-auto">$110/day</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card p-3 rent-box mb-5">
+      <h2 class="h5 text-dark mb-3">Book a car</h2>
+      <form id="rentForm">
+        <div class="row g-3">
+          <div class="col-md-3"><label for="index" class="form-label">Car index (1–9)</label><input id="index" name="index" type="number" class="form-control" min="1" max="9" placeholder="1"></div>
+          <div class="col-md-9"><label for="car" class="form-label">Choose car</label><select id="car" name="car" class="form-select" required><option value="">-- Select a car --</option><option>1. Porsche 911</option><option>2. BMW M5</option><option>3. Mercedes G63</option><option>4. Toyota Camry</option><option>5. Kia Sportage</option><option>6. Hyundai Tucson</option><option>7. Lexus ES</option><option>8. Nissan X-Trail</option><option>9. Audi Q5</option></select></div>
+
+          <div class="col-md-6"><label for="start" class="form-label">Start date</label><input id="start" type="date" class="form-control" required></div>
+          <div class="col-md-6"><label for="end" class="form-label">End date</label><input id="end" type="date" class="form-control" required></div>
+
+          <div class="col-md-6"><label for="name" class="form-label">Full name</label><input id="name" type="text" class="form-control" required></div>
+          <div class="col-md-6"><label for="phone" class="form-label">Phone</label><input id="phone" type="tel" class="form-control" placeholder="+7 700 000 0000" required></div>
+
+          <div class="col-12"><label for="notes" class="form-label">Notes</label><textarea id="notes" class="form-control" rows="2" placeholder="For example: need a child seat"></textarea></div>
+
+          <div class="col-12 text-center"><button type="submit" class="btn btn-success me-2">Book Now</button><button type="reset" class="btn btn-outline-secondary">Clear</button></div>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="bg-black text-center text-secondary py-3">
+    <div class="container">© 2025 Nomad. Team Members: K. Mukhammedali & A. Alikhan</div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const idxInput = document.getElementById('index');
+    const carSel = document.getElementById('car');
+    if (idxInput && carSel) {
+      idxInput.addEventListener('input', function () {
+        const v = parseInt(this.value);
+        if (v >= 1 && v <= 9) carSel.selectedIndex = v;
+      });
+    }
+    document.getElementById('rentForm')?.addEventListener('submit', function(e){ e.preventDefault(); alert('Booking request submitted. We will contact you soon.'); this.reset(); });
+  </script>
+</body>
+</html>

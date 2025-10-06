@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
+:root {
+  --bg-black: #000;
+  --text-light: #e6e6e6;
+  --muted: #a0a0a0;
+  --primary: #0dcaf0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  background: var(--bg-black);
+  color: var(--text-light);
+}
+
+.logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+@media (max-width: 600px) {
+  .logo-img {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+.card-img-top {
+  height: 220px;
+  object-fit: cover;
+}
+.card {
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.card-body {
+  background-color: #000000;
+  color: var(--text-light);
+}
+
+.floating-burger {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1050;
+  border-radius: 8px;
+  font-size: 22px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.floating-burger:hover {
+  background-color: #222;
+}
+
+footer {
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.text-secondary {
+  color: var(--muted) !important;
+}
+
+@media (max-width: 768px) {
+  .card-img-top {
+    height: 160px;
+  }
+}
+
+.text-muted{
+  color:white !important; 
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nomad - Contact</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style_mc.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <img src="https://img.freepik.com/premium-vector/ninja-logo-icon-design_775854-2611.jpg"
+               alt="Nomad logo" class="logo-img me-2">
+          <span class="fw-bold text-light">Nomad</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="catalog.html">Catalog</a></li>
+            <li class="nav-item"><a class="nav-link" href="rent.html">Rent</a></li>
+            <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <button class="btn btn-dark floating-burger" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas">
+    ☰
+  </button>
+
+  <div class="offcanvas offcanvas-end text-bg-dark" id="menuOffcanvas">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title">Nomad Menu</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column gap-3">
+      <a href="index.html" class="nav-link text-light">🏠 Home</a>
+      <a href="catalog.html" class="nav-link text-light">🚗 Catalog</a>
+      <a href="rent.html" class="nav-link text-light">🔑 Rent</a>
+      <a href="contact.html" class="nav-link text-light">📞 Contact</a>
+      <a href="typography.html" class="nav-link text-light">🔤 Typography Demo</a>
+      <a href="cards.html" class="nav-link text-light">🃏 Card Group Demo</a>
+    </div>
+  </div>
+
+  <main class="container mt-5 pt-5">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card bg-dark text-light p-4 h-100 border-secondary">
+          <h3 class="text-primary mb-3">Our Office</h3>
+          <p><strong>📞 Phone:</strong> +7 777 881 2686</p>
+          <p><strong>✉️ Email:</strong> nomad@gmail.com</p>
+          <p><strong>📍 Address:</strong> Astana, Kazakhstan</p>
+          <hr class="border-secondary">
+          <h4 class="text-secondary">Team Members</h4>
+          <p>K. Mukhammedali — CEO</p>
+          <p>A. Alikhan — CEO</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card bg-dark text-light p-4 border-secondary">
+          <h3 class="text-primary mb-3">Send us a Message</h3>
+          <form id="contactForm">
+            <div class="mb-3">
+              <label for="name" class="form-label">Your Name</label>
+              <input id="name" class="form-control bg-black text-light border-secondary" required>
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone</label>
+              <input id="phone" type="tel" class="form-control bg-black text-light border-secondary" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea id="message" rows="4" class="form-control bg-black text-light border-secondary" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-outline-light">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-black text-center text-secondary py-4 mt-5">
+    <p>© 2025 Nomad. Team Members: K. Mukhammedali & A. Alikhan</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', e=>{
+      e.preventDefault();
+      alert('Message sent successfully!');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
