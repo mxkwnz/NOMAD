@@ -76,3 +76,124 @@ footer {
 #orderModal{
   color:black;
 }
+
+.faq-list {
+    max-width: 700px;
+    color: #e5e5e5;
+    text-align: left;
+    margin: 0 auto;
+  }
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 0;
+  }
+
+.faq-question {
+    cursor: pointer;
+    font-size: 1.05rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color 0.3s ease;
+  }
+
+.faq-question::after {
+    content: '+';
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+
+.faq-item.active .faq-question::after {
+    transform: rotate(45deg);
+  }
+
+.faq-item.active .faq-question {
+    color: #0d6efd;
+  }
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+    font-size: 0.95rem;
+    color: #b5b5b5;
+    padding-left: 4px;
+  }
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 8px;
+  }
+
+.contact-btn {
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+.contact-btn:hover {
+    background: #0b5ed7;
+  }
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+.popup-content {
+    position: relative;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    width: 320px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    color: #fff;
+  }
+
+.popup-content input, 
+.popup-content textarea {
+    width: 100%;
+    margin: 8px 0;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #2a2a2a;
+    color: #fff;
+  }
+
+.popup-content button {
+    background: #0d6efd;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+.popup-content button:hover {
+    background: #0b5ed7;
+  }
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #ccc;
+  }

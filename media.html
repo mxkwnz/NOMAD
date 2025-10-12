@@ -1,33 +1,121 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nomad — Media queries demo</title>
   <style>
-    :root{--bg:#0b0b0b;--card:#efe8e5;--text:#f1f1f1;--muted:#cfcfcf;}
-    body{margin:0;padding:24px;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);}
-    header{text-align:center;margin-bottom:18px;}
-    h1{margin:0 0 6px;font-size:28px;}
-    p.lead{color:var(--muted);margin:0 0 20px;}
+    :root {
+      --bg: #0b0b0b;
+      --card: #efe8e5;
+      --text: #f1f1f1;
+      --muted: #cfcfcf;
+    }
 
-    .cards{display:grid;gap:16px;grid-template-columns:repeat(3,1fr);max-width:1000px;margin:0 auto;padding:10px;}
-    .card{background:var(--card);padding:18px;border-radius:8px;color:#111;box-shadow:0 8px 20px rgba(0,0,0,0.25);text-align:center;}
-    .card h3{margin:8px 0;font-size:18px;}
-    .card p{color:#444;font-size:14px;}
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
 
-    @media (max-width:767.98px){h1{font-size:20px;} .cards{grid-template-columns:1fr;}}
-    @media (min-width:768px) and (max-width:991.98px){h1{font-size:24px;} .cards{grid-template-columns:repeat(2,1fr);}}
-    @media (min-width:992px){h1{font-size:32px;} .cards{grid-template-columns:repeat(3,1fr);}}
+    header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+    }
+
+    p.lead {
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .cards {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 8px;
+      color: #111;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      text-align: center;
+    }
+
+    .card h3 {
+      margin: 8px 0;
+      font-size: 18px;
+    }
+
+    .card p {
+      color: #444;
+      font-size: 14px;
+    }
+
+    @media (max-width:767.98px) {
+      h1 {
+        font-size: 20px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width:768px) and (max-width:991.98px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width:992px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
   </style>
 </head>
+
 <body>
-  <header><h1>Media queries demo (Part 1)</h1><p class="lead">Pure CSS media queries — typography and layout adapt to viewport width.</p></header>
+  <header>
+    <h1>Media queries demo (Part 1)</h1>
+    <p class="lead">Pure CSS media queries — typography and layout adapt to viewport width.</p>
+  </header>
 
   <section class="cards" aria-label="Responsive cards">
-    <article class="card"><h3>Responsive typography</h3><p>Different font sizes for mobile/tablet/desktop implemented with media queries (no Bootstrap).</p></article>
-    <article class="card"><h3>Adaptive grid</h3><p>3 cards on desktop, 2 on tablet, 1 on mobile using CSS Grid + breakpoints.</p></article>
-    <article class="card"><h3>Accessible</h3><p>Semantics and clear contrast for screenshots (for report).</p></article>
+    <article class="card">
+      <h3>Responsive typography</h3>
+      <p>Different font sizes for mobile/tablet/desktop implemented with media queries (no Bootstrap).</p>
+    </article>
+    <article class="card">
+      <h3>Adaptive grid</h3>
+      <p>3 cards on desktop, 2 on tablet, 1 on mobile using CSS Grid + breakpoints.</p>
+    </article>
+    <article class="card">
+      <h3>Accessible</h3>
+      <p>Semantics and clear contrast for screenshots (for report).</p>
+    </article>
   </section>
 </body>
+
 </html>
