@@ -39,3 +39,20 @@ const contactForm = document.getElementById('contactForm');
   }
   updateClock();
   setInterval(updateClock, 1000);
+
+  const greetBox = document.createElement("div");
+  let msgTime;
+  switch (true) {
+    case new Date().getHours() < 12: msgTime = "Good morning!"; break;
+    case new Date().getHours() < 18: msgTime = "Good afternoon!"; break;
+    default: msgTime = "Good evening!";
+  }
+  greetBox.className = "text-center text-info mb-2";
+  greetBox.textContent = msgTime;
+  document.querySelector("main").prepend(greetBox);
+
+  const sndClick = new Audio("bell.mp3");
+  bgBtn.addEventListener("click", () => {
+    sndClick.currentTime = 0;
+    sndClick.play();
+  });

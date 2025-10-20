@@ -51,13 +51,13 @@ let greeting = "";
 
 switch (true) {
   case (hour < 12):
-    greeting = "Good Morning! 🌅";
+    greeting = "Good Morning!";
     break;
   case (hour < 18):
-    greeting = "Good Afternoon! ☀️";
+    greeting = "Good Afternoon!";
     break;
   default:
-    greeting = "Good Evening! 🌙";
+    greeting = "Good Evening!";
 }
 
 greetingMsg.textContent = greeting;
