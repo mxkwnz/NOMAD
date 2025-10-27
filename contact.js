@@ -56,3 +56,11 @@ const contactForm = document.getElementById('contactForm');
     sndClick.currentTime = 0;
     sndClick.play();
   });
+
+  const savedColor = localStorage.getItem("bgColor");
+    if (savedColor) document.body.style.background = savedColor;
+
+    bgBtn.addEventListener("click", () => {
+      const bg = document.body.style.background;
+      localStorage.setItem("bgColor", bg);
+  } );

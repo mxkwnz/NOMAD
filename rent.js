@@ -26,27 +26,6 @@ const idxInput = document.getElementById('index');
   updateClock();
   setInterval(updateClock, 1000);
 
-  const cars = [
-  { name: 'Porsche 911', price: 120 },
-  { name: 'BMW M5', price: 140 },
-  { name: 'Mercedes G63', price: 200 },
-  { name: 'Toyota Camry', price: 50 },
-  { name: 'Kia Sportage', price: 45 },
-  { name: 'Hyundai Tucson', price: 48 },
-  { name: 'Lexus ES', price: 95 },
-  { name: 'Nissan X-Trail', price: 52 },
-  { name: 'Audi Q5', price: 110 }
-];
-
-function showAffordable() {
-  const cheap = cars.filter(c => c.price < 100).map(c => c.name);
-  alert("Cars under $100/day:\n" + cheap.join('\n'));
-}
-
-const cheapBtn = document.getElementById('cheapBtn');
-  if (cheapBtn) {
-    cheapBtn.addEventListener('click', showAffordable);
-}
 
 document.addEventListener('keydown', e => {
   if (e.key.toLowerCase() === 'r') {

@@ -6,9 +6,12 @@
   <title>Nomad - Catalog</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link rel="stylesheet" href="style_mc.css">
 </head>
-<body>
+<body class="dark-mode">
+
+  <div id="scrollProgress"></div>
 
  <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-black fixed-top">
@@ -33,6 +36,7 @@
       </div>
     </nav>
   </header>
+
 
   <button class="btn btn-dark floating-burger" data-bs-toggle="offcanvas" data-bs-target="#menuOffcanvas">
     ☰
@@ -60,6 +64,11 @@
       <p class="text-secondary">Premium cars for purchase.</p>
     </section>
 
+    <div class="text-center mb-4">
+      <input type="text" id="searchInput" class="form-control w-50 mx-auto" placeholder="Search cars...">
+      <ul id="suggestions" class="list-group w-50 mx-auto mt-2"></ul>
+    </div>
+    
     <div id="catalogCarousel" class="carousel slide mb-4" data-bs-ride="carousel" aria-label="Catalog images">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#catalogCarousel" data-bs-slide-to="0" class="active"></button>
@@ -99,10 +108,11 @@
           <img src="https://bringatrailer.com/wp-content/uploads/2022/09/1991_porsche_911-singer_docs_502_web-81507.jpg" class="card-img-top" alt="Porsche 911">
           <div class="card-body">
             <h5 class="card-title">Porsche 911</h5>
-            <p class="card-text text-muted">Iconic design, uncompromising power.</p>
+            <p class="card-text">Iconic design, uncompromising power.</p>
             <p class="fw-bold mt-auto">$120,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Porsche 911" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Porsche 911" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="porschesound.mp3">Engine Sound</button>
+            <p class="cc">
           </div>
         </div>
       </div>
@@ -112,9 +122,9 @@
           <img src="https://gateauto.ru/upload/resize_cache/iblock/1a2/1920_1080_1/7bggqwwhh3r3ckslkhydwmjopcfuinex.jpg" class="card-img-top" alt="Lamborghini Aventador">
           <div class="card-body">
             <h5 class="card-title">Lamborghini Aventador</h5>
-            <p class="card-text text-muted">Bold design, raw power.</p>
+            <p class="card-text">Bold design, raw power.</p>
             <p class="fw-bold">$500,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Lamborghini Aventador" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Lamborghini Aventador" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="lambo.mp3">Engine Sound</button>
           </div>
         </div>
@@ -125,9 +135,9 @@
           <img src="https://carbonfibergear.com/cdn/shop/articles/2021-bugatti-chiron-front_1.jpg?v=1617812644" class="card-img-top" alt="Bugatti Chiron">
           <div class="card-body">
             <h5 class="card-title">Bugatti Chiron</h5>
-            <p class="card-text text-muted">Unmatched speed, ultimate luxury.</p>
+            <p class="card-text">Unmatched speed, ultimate luxury.</p>
             <p class="fw-bold">$3,000,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Bugatti Chiron" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Bugatti Chiron" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="bugatti.mp3">Engine Sound</button>            
           </div>
         </div>
@@ -138,9 +148,9 @@
           <img src="https://trinityrental.com/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Ftrinityrental-e51d5.appspot.com%2FFerrari_SF_90_ccd55a4580%2FFerrari_SF_90_ccd55a4580.jpg&w=3840&q=75" class="card-img-top" alt="Ferrari SF90">
           <div class="card-body">
             <h5 class="card-title">Ferrari SF90 Stradale</h5>
-            <p class="card-text text-muted">Hybrid speed meets luxury.</p>
+            <p class="card-text">Hybrid speed meets luxury.</p>
             <p class="fw-bold">$620,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Ferrari SF90" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Ferrari SF90" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="ferra.mp3">Engine Sound</button>
           </div>
         </div>
@@ -151,9 +161,9 @@
           <img src="https://res.cloudinary.com/unix-center/image/upload/c_limit,dpr_3.0,f_auto,fl_progressive,g_center,h_240,q_auto:good,w_385/sp2smwkm2mz24tzwvbki.webp" class="card-img-top" alt="Bentley Continental GT">
           <div class="card-body">
             <h5 class="card-title">Bentley Continental GT</h5>
-            <p class="card-text text-muted">Power and elegance combined.</p>
+            <p class="card-text">Power and elegance combined.</p>
             <p class="fw-bold">$240,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Bentley Continental GT" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Bentley Continental GT" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="bentley.mp3">Engine Sound</button>
           </div>
         </div>
@@ -164,9 +174,9 @@
           <img src="https://f7432d8eadcf865aa9d9-9c672a3a4ecaaacdf2fee3b3e6fd2716.ssl.cf3.rackcdn.com/C2553/U665/IMG_25148-large.jpg" class="card-img-top" alt="BMW M5">
           <div class="card-body">
             <h5 class="card-title">BMW M5 F90</h5>
-            <p class="card-text text-muted">Everyday comfort and raw power.</p>
+            <p class="card-text">Everyday comfort and raw power.</p>
             <p class="fw-bold">$140,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="BMW M5" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="BMW M5" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="bmw.mp3">Engine Sound</button>         
           </div>
         </div>
@@ -177,9 +187,9 @@
           <img src="https://www.ilusso.com/imagetag/2494/main/l/Used-2022-Mercedes-Benz-G-Class-AMG-G-63-1698708871.jpg" class="card-img-top" alt="Mercedes G63">
           <div class="card-body">
             <h5 class="card-title">Mercedes G63 AMG</h5>
-            <p class="card-text text-muted">Top performance and luxury.</p>
+            <p class="card-text">Top performance and luxury.</p>
             <p class="fw-bold">$200,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Mercedes G63" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Mercedes G63" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="merc.mp3">Engine Sound</button>        
           </div>
         </div>
@@ -190,9 +200,9 @@
           <img src="https://mediapool.bmwgroup.com/cache/P9/202404/P90547815/P90547815-phantom-extended-magnestism-600px.jpg" class="card-img-top" alt="Rolls-Royce Phantom">
           <div class="card-body">
             <h5 class="card-title">Rolls-Royce Phantom</h5>
-            <p class="card-text text-muted">Timeless luxury and comfort.</p>
+            <p class="card-text">Timeless luxury and comfort.</p>
             <p class="fw-bold">$450,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Rolls-Royce Phantom" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Rolls-Royce Phantom" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="rolls.mp3">Engine Sound</button>         
           </div>
         </div>
@@ -203,9 +213,9 @@
           <img src="Audi Q5.jpg" class="card-img-top" alt="Audi Q5">
           <div class="card-body">
             <h5 class="card-title">Audi Q5</h5>
-            <p class="card-text text-muted">Modern SUV, practical and comfortable.</p>
+            <p class="card-text">Modern SUV, practical and comfortable.</p>
             <p class="fw-bold">$110,000</p>
-            <button class="btn btn-outline-light btn-sm" data-car="Audi Q5" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
+            <button class="btn btn-success btn-sm" data-car="Audi Q5" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
             <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="audi.mp3">Engine Sound</button>         
           </div>
         </div>
@@ -216,14 +226,14 @@
       <div class="modal-dialog">
         <form class="modal-content" id="orderForm">
           <div class="modal-header">
-            <h5 class="modal-title">Order car</h5>
+            <h5 class="modal-title text-dark">Order car</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="mb-3"><label for="orderCar" class="form-label">Car</label><input id="orderCar" class="form-control" readonly></div>
-            <div class="mb-3"><label for="orderName" class="form-label">Name</label><input id="orderName" class="form-control" required></div>
-            <div class="mb-3"><label for="orderEmail" class="form-label">Email</label><input id="orderEmail" type="email" class="form-control" required></div>
-            <div class="mb-3"><label for="orderPhone" class="form-label">Phone</label><input id="orderPhone" type="tel" class="form-control" required></div>
+            <div class="mb-3"><label for="orderCar" class="form-label text-dark">Car</label><input id="orderCar" class="form-control" readonly></div>
+            <div class="mb-3"><label for="orderName" class="form-label text-dark">Name</label><input id="orderName" class="form-control" required></div>
+            <div class="mb-3"><label for="orderEmail" class="form-label text-dark">Email</label><input id="orderEmail" type="email" class="form-control" required></div>
+            <div class="mb-3"><label for="orderPhone" class="form-label text-dark">Phone</label><input id="orderPhone" type="tel" class="form-control" required></div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-success" type="submit">Submit order</button>
