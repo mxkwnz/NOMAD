@@ -37,7 +37,6 @@ $(document).ready(function() {
       const title = $(this).find(".card-title").text();
       if (title.includes(selected)) {
         $(this).fadeIn(400);
-        $("html, body").animate({ scrollTop: $(this).offset().top - 100 }, 600);
       }
     });
   });
@@ -51,7 +50,6 @@ $(document).ready(function() {
     $(".card").fadeIn(400); 
     $("#carSearch").val("");
     showToast("Booking", "Returned to full list for booking");
-    $("html, body").animate({ scrollTop: $("#carSearch").offset().top - 100 }, 600);
   });
 
 

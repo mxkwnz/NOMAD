@@ -69,7 +69,7 @@ $(document).ready(function() {
     let $this = $(this);
     let target = +$this.data("target");
     $({ countNum: 0 }).animate({ countNum: target }, {
-      duration: 1000,
+      duration: 3000,
       easing: "swing",
       step: function() {
         $this.text(Math.floor(this.countNum));
