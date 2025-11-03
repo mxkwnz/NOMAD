@@ -33,8 +33,8 @@ document.addEventListener('keydown', e => {
   }
 });
 
-  const clickSound = new Audio("bell.mp3");
-  const successSound = new Audio("booked_sound.mp3");
+  const clickSound = new Audio("sound/bell.mp3");
+  const successSound = new Audio("sound/booked_sound.mp3");
 
     if (bgBtn) {
       bgBtn.addEventListener('click', () => {
@@ -74,6 +74,29 @@ document.addEventListener('keydown', e => {
         successSound.play();
       });
     }
+
+const themeToggle = document.getElementById("themeToggle");
+
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  themeToggle.textContent = "Day Mode";
+} else {
+  document.body.classList.remove("dark-mode");
+  themeToggle.textContent = "Night Mode";
+}
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "Day Mode";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.textContent = "Night Mode";
+    localStorage.setItem("theme", "light");
+  }
+});
+
+
 
     const savedColor = localStorage.getItem("bgColor");
     if (savedColor) document.body.style.background = savedColor;

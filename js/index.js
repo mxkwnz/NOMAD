@@ -8,10 +8,24 @@ document.getElementById('closePopup').onclick = () => popup.style.display = 'non
 window.onclick = e => { if (e.target === popup) popup.style.display = 'none'; };
 
 const themeToggle = document.getElementById("themeToggle");
+
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  themeToggle.textContent = "Day Mode";
+} else {
+  document.body.classList.remove("dark-mode");
+  themeToggle.textContent = "Night Mode";
+}
+
 themeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
-  themeToggle.textContent =
-    document.body.classList.contains("dark-mode") ? "Day Mode" : "Night Mode";
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "Day Mode";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.textContent = "Night Mode";
+    localStorage.setItem("theme", "light");
+  }
 });
 
 const readMoreBtn = document.getElementById("readMoreBtn");

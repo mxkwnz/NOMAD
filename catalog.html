@@ -52,8 +52,6 @@
       <a href="catalog.html" class="nav-link text-light">🚗 Catalog</a>
       <a href="rent.html" class="nav-link text-light">🔑 Rent</a>
       <a href="contact.html" class="nav-link text-light">📞 Contact</a>
-      <a href="typography.html" class="nav-link text-light">🔤 Typography Demo</a>
-      <a href="cards.html" class="nav-link text-light">🃏 Card Group Demo</a>
     </div>
   </div>
 
@@ -78,15 +76,15 @@
       </div>
 
       <div class="carousel-inner">
-        <div class="carousel-item active"><img src="Porsche 911.jpg" class="d-block w-100 carousel-img" alt="Porsche 911"></div>
-        <div class="carousel-item"><img src="BMW M5.jpg" class="d-block w-100 carousel-img" alt="BMW M5"></div>
-        <div class="carousel-item"><img src="Mercedes G63.jpg" class="d-block w-100 carousel-img" alt="Mercedes G63"></div>
-        <div class="carousel-item"><img src="Toyota Camry.jpg" class="d-block w-100 carousel-img" alt="Toyota Camry"></div>
-        <div class="carousel-item"><img src="Kia Sportage.jpg" class="d-block w-100 carousel-img" alt="Kia Sportage"></div>
-        <div class="carousel-item"><img src="Hyundai Tucson.jpg" class="d-block w-100 carousel-img" alt="Hyundai Tucson"></div>
-        <div class="carousel-item"><img src="Lexus ES.png" class="d-block w-100 carousel-img" alt="Lexus ES"></div>
-        <div class="carousel-item"><img src="Nissan X-Trail.jpg" class="d-block w-100 carousel-img" alt="Nissan X-Trail"></div>
-        <div class="carousel-item"><img src="Audi Q5.jpg" class="d-block w-100 carousel-img" alt="Audi Q5"></div>
+        <div class="carousel-item active"><img src="images/Porsche 911.jpg" class="d-block w-100 carousel-img" alt="Porsche 911"></div>
+        <div class="carousel-item"><img src="images/BMW M5.jpg" class="d-block w-100 carousel-img" alt="BMW M5"></div>
+        <div class="carousel-item"><img src="images/Mercedes G63.jpg" class="d-block w-100 carousel-img" alt="Mercedes G63"></div>
+        <div class="carousel-item"><img src="images/Toyota Camry.jpg" class="d-block w-100 carousel-img" alt="Toyota Camry"></div>
+        <div class="carousel-item"><img src="images/Kia Sportage.jpg" class="d-block w-100 carousel-img" alt="Kia Sportage"></div>
+        <div class="carousel-item"><img src="images/Hyundai Tucson.jpg" class="d-block w-100 carousel-img" alt="Hyundai Tucson"></div>
+        <div class="carousel-item"><img src="images/Lexus ES.png" class="d-block w-100 carousel-img" alt="Lexus ES"></div>
+        <div class="carousel-item"><img src="images/Nissan X-Trail.jpg" class="d-block w-100 carousel-img" alt="Nissan X-Trail"></div>
+        <div class="carousel-item"><img src="images/Audi Q5.jpg" class="d-block w-100 carousel-img" alt="Audi Q5"></div>
       </div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#catalogCarousel" data-bs-slide="prev">
@@ -111,7 +109,11 @@
             <p class="card-text">Iconic design, uncompromising power.</p>
             <p class="fw-bold mt-auto">$120,000</p>
             <button class="btn btn-success btn-sm" data-car="Porsche 911" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="porschesound.mp3">Engine Sound</button>
+            <audio id="porscheSound" src="sound/porschesound.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('porscheSound').play()">
+              Engine Sound
+            </button>
             <p class="cc">
           </div>
         </div>
@@ -125,7 +127,11 @@
             <p class="card-text">Bold design, raw power.</p>
             <p class="fw-bold">$500,000</p>
             <button class="btn btn-success btn-sm" data-car="Lamborghini Aventador" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="lambo.mp3">Engine Sound</button>
+            <audio id="lamboSound" src="sound/lambo.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('lamboSound').play()">
+              Engine Sound
+            </button>      
           </div>
         </div>
       </div>
@@ -138,7 +144,11 @@
             <p class="card-text">Unmatched speed, ultimate luxury.</p>
             <p class="fw-bold">$3,000,000</p>
             <button class="btn btn-success btn-sm" data-car="Bugatti Chiron" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="bugatti.mp3">Engine Sound</button>            
+            <audio id="bugattiSound" src="sound/bugatti.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('bugattiSound').play()">
+              Engine Sound
+            </button>
           </div>
         </div>
       </div>
@@ -151,7 +161,11 @@
             <p class="card-text">Hybrid speed meets luxury.</p>
             <p class="fw-bold">$620,000</p>
             <button class="btn btn-success btn-sm" data-car="Ferrari SF90" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="ferra.mp3">Engine Sound</button>
+            <audio id="ferraSound" src="sound/ferra.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('ferraSound').play()">
+              Engine Sound
+            </button>
           </div>
         </div>
       </div>
@@ -164,7 +178,12 @@
             <p class="card-text">Power and elegance combined.</p>
             <p class="fw-bold">$240,000</p>
             <button class="btn btn-success btn-sm" data-car="Bentley Continental GT" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="bentley.mp3">Engine Sound</button>
+            <audio id="bentleySound" src="sound/bentley.mp3"></audio>
+            <button 
+              class="btn btn-outline-danger btn-sm sound-btn"
+              onclick="document.getElementById('bentleySound').play()">
+              Engine Sound
+            </button>
           </div>
         </div>
       </div>
@@ -177,7 +196,11 @@
             <p class="card-text">Everyday comfort and raw power.</p>
             <p class="fw-bold">$140,000</p>
             <button class="btn btn-success btn-sm" data-car="BMW M5" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="bmw.mp3">Engine Sound</button>         
+            <audio id="bmwSound" src="sound/bmw.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('bmwSound').play()">
+              Engine Sound
+            </button>
           </div>
         </div>
       </div>
@@ -190,7 +213,11 @@
             <p class="card-text">Top performance and luxury.</p>
             <p class="fw-bold">$200,000</p>
             <button class="btn btn-success btn-sm" data-car="Mercedes G63" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="merc.mp3">Engine Sound</button>        
+            <audio id="mercSound" src="sound/merc.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('mercSound').play()">
+              Engine Sound
+            </button>
           </div>
         </div>
       </div>
@@ -203,21 +230,29 @@
             <p class="card-text">Timeless luxury and comfort.</p>
             <p class="fw-bold">$450,000</p>
             <button class="btn btn-success btn-sm" data-car="Rolls-Royce Phantom" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="rolls.mp3">Engine Sound</button>         
-          </div>
+            <audio id="rollsSound" src="sound/rolls.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('rollsSound').play()">
+              Engine Sound
+            </button>         
+           </div>
         </div>
       </div>
 
       <div class="col">
         <div class="card h-100">
-          <img src="Audi Q5.jpg" class="card-img-top" alt="Audi Q5">
+          <img src="images/Audi Q5.jpg" class="card-img-top" alt="Audi Q5">
           <div class="card-body">
             <h5 class="card-title">Audi Q5</h5>
             <p class="card-text">Modern SUV, practical and comfortable.</p>
             <p class="fw-bold">$110,000</p>
             <button class="btn btn-success btn-sm" data-car="Audi Q5" data-bs-toggle="modal" data-bs-target="#orderModal">Buy Now</button>
-            <button class="btn btn-outline-danger btn-sm sound-btn" data-sound="audi.mp3">Engine Sound</button>         
-          </div>
+            <audio id="audiSound" src="sound/audi.mp3"></audio>
+            <button class="btn btn-outline-danger btn-sm sound-btn"
+                    onclick="document.getElementById('audiSound').play()">
+              Engine Sound
+            </button>       
+             </div>
         </div>
       </div>
     </section>
@@ -249,7 +284,7 @@
     <div class="container">© 2025 Nomad. Team Members: K. Mukhammedali & A. Alikhan</div>
   </footer>
 
-  <script src="catalog.js"></script>
+  <script src="js/catalog.js"></script>
 
 </body>
 </html>

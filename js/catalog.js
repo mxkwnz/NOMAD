@@ -73,16 +73,39 @@ switch (true) {
 
 greetingMsg.textContent = greeting;
 
+const themeToggle = document.getElementById("themeToggle");
+
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  themeToggle.textContent = "Day Mode";
+} else {
+  document.body.classList.remove("dark-mode");
+  themeToggle.textContent = "Night Mode";
+}
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "Day Mode";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.textContent = "Night Mode";
+    localStorage.setItem("theme", "light");
+  }
+});
+
+
 const soundButtons = document.querySelectorAll('.sound-btn');
 
 soundButtons.forEach(button => {
   button.addEventListener('click', () => {
     const soundFile = button.getAttribute('data-sound');
-    const sound = new Audio(soundFile);
+    const sound = new Audio('../' + soundFile);
     sound.currentTime = 0;
-    sound.play();
+    sound.play().catch(err => console.error('Audio play error:', err));
   });
 });
+
 
 const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 let currentIndex = 0;

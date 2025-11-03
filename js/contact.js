@@ -51,12 +51,34 @@ const contactForm = document.getElementById('contactForm');
   greetBox.textContent = msgTime;
   document.querySelector("main").prepend(greetBox);
 
-  const sndClick = new Audio("bell.mp3");
+  const sndClick = new Audio("sound/bell.mp3");
   bgBtn.addEventListener("click", () => {
     sndClick.currentTime = 0;
     sndClick.play();
   });
 
+const themeToggle = document.getElementById("themeToggle");
+
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark-mode");
+  themeToggle.textContent = "Day Mode";
+} else {
+  document.body.classList.remove("dark-mode");
+  themeToggle.textContent = "Night Mode";
+}
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+  if (document.body.classList.contains("dark-mode")) {
+    themeToggle.textContent = "Day Mode";
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggle.textContent = "Night Mode";
+    localStorage.setItem("theme", "light");
+  }
+});
+
+  
   const savedColor = localStorage.getItem("bgColor");
     if (savedColor) document.body.style.background = savedColor;
 
