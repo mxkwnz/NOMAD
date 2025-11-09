@@ -21,9 +21,12 @@
                alt="Nomad logo" class="logo-img me-2">
           <span class="fw-bold text-light">Nomad</span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="d-flex align-items-center gap-2">
+          <button id="themeToggle" class="btn btn-sm btn-outline-light me-2">Day Mode</button>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
 
         <div class="collapse navbar-collapse justify-content-end" id="navMenu">
           <ul class="navbar-nav">
@@ -31,6 +34,12 @@
             <li class="nav-item"><a class="nav-link active" href="catalog.html">Catalog</a></li>
             <li class="nav-item"><a class="nav-link" href="rent.html">Rent</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item" id="profileNavItem" style="display:none;">
+              <a class="nav-link" href="profile.html">Profile</a>
+            </li>
+            <li class="nav-item" id="authNavItem">
+              <a class="nav-link" href="#" id="loginNavLink" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -52,6 +61,7 @@
       <a href="catalog.html" class="nav-link text-light">🚗 Catalog</a>
       <a href="rent.html" class="nav-link text-light">🔑 Rent</a>
       <a href="contact.html" class="nav-link text-light">📞 Contact</a>
+      <a href="profile.html" class="nav-link text-light" id="offcanvasProfile" style="display:none;">👤 Profile</a>
     </div>
   </div>
 
@@ -114,7 +124,6 @@
                     onclick="document.getElementById('porscheSound').play()">
               Engine Sound
             </button>
-            <p class="cc">
           </div>
         </div>
       </div>
@@ -266,9 +275,12 @@
           </div>
           <div class="modal-body">
             <div class="mb-3"><label for="orderCar" class="form-label text-dark">Car</label><input id="orderCar" class="form-control" readonly></div>
-            <div class="mb-3"><label for="orderName" class="form-label text-dark">Name</label><input id="orderName" class="form-control" required></div>
-            <div class="mb-3"><label for="orderEmail" class="form-label text-dark">Email</label><input id="orderEmail" type="email" class="form-control" required></div>
-            <div class="mb-3"><label for="orderPhone" class="form-label text-dark">Phone</label><input id="orderPhone" type="tel" class="form-control" required></div>
+            <div class="mb-3"><label for="orderName" class="form-label text-dark">Name</label><input id="orderName" class="form-control" required>
+              <div class="invalid-feedback"></div></div>
+            <div class="mb-3"><label for="orderEmail" class="form-label text-dark">Email</label><input id="orderEmail" type="email" class="form-control" required>
+              <div class="invalid-feedback"></div></div>
+            <div class="mb-3"><label for="orderPhone" class="form-label text-dark">Phone</label><input id="orderPhone" type="tel" class="form-control" required>
+              <div class="invalid-feedback"></div></div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-success" type="submit">Submit order</button>
@@ -284,7 +296,81 @@
     <div class="container">© 2025 Nomad. Team Members: K. Mukhammedali & A. Alikhan</div>
   </footer>
 
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">Login</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">Email</label>
+              <input type="email" class="form-control bg-secondary text-light" id="loginEmail" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">Password</label>
+              <input type="password" class="form-control bg-secondary text-light" id="loginPassword" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3 text-danger" id="loginError"></div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+          <hr class="border-secondary">
+          <p class="text-center">Don't have an account? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title">Sign Up</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="signupForm">
+            <div class="mb-3">
+              <label for="signupName" class="form-label">Name</label>
+              <input type="text" class="form-control bg-secondary text-light" id="signupName" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+              <label for="signupEmail" class="form-label">Email</label>
+              <input type="email" class="form-control bg-secondary text-light" id="signupEmail" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+              <label for="signupPhone" class="form-label">Phone</label>
+              <input type="tel" class="form-control bg-secondary text-light" id="signupPhone" required>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+              <label for="signupPassword" class="form-label">Password</label>
+              <input type="password" class="form-control bg-secondary text-light" id="signupPassword" required>
+              <small class="text-muted">Must be at least 8 characters with uppercase, lowercase, number, and special character</small>
+              <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3 text-danger" id="signupError"></div>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+          <hr class="border-secondary">
+          <p class="text-center">Already have an account? <a href="#" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/auth_ui.js"></script>
+  <script src="js/auth_forms.js"></script>
   <script src="js/catalog.js"></script>
+  <script src="js/catalog_enhanced.js"></script>
 
 </body>
 </html>

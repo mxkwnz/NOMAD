@@ -10,9 +10,18 @@
 body {
   margin: 0;
   font-family: 'Cinzel', serif;
+  font-weight: 500;
   background: var(--bg-black);
   color: var(--text-light);
   transition: background 0.6s ease, color 0.4s ease;
+}
+
+p, span, a, li, label, input, textarea, select, button {
+  font-weight: 500;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
 }
 
 .logo-img {
@@ -214,4 +223,58 @@ body:not(.dark-mode) .navbar-dark .navbar-nav .nav-link.active {
 
 .spinner-border-sm {
   vertical-align: middle;
+}
+
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,1)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0,0.8)' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+#themeToggle {
+  white-space: nowrap;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  line-height: 1.2;
+}
+
+#themeToggle:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 991px) {
+  #themeToggle {
+    font-size: 0.65rem;
+    padding: 0.15rem 0.4rem;
+  }
+}
+
+.navbar .d-flex.align-items-center {
+  gap: 0.5rem;
+}
+
+body:not(.dark-mode) .navbar-light .navbar-brand span {
+  color: #111 !important;
+}
+
+body:not(.dark-mode) #themeToggle.btn-outline-dark {
+  border-color: #111;
+  color: #111;
+}
+
+body:not(.dark-mode) #themeToggle.btn-outline-dark:hover {
+  background-color: #111;
+  color: #fff;
+}
+
+body:not(.dark-mode) .offcanvas.text-bg-light .offcanvas-title {
+  color: #111 !important;
+}
+
+body.dark-mode .offcanvas.text-bg-dark .offcanvas-title {
+  color: #fff !important;
 }

@@ -1,107 +1,137 @@
 const idxInput = document.getElementById('index');
-  const carSel = document.getElementById('car');
-  if (idxInput && carSel) {
-    idxInput.addEventListener('input', function () {
-      const v = parseInt(this.value);
-      if (v >= 1 && v <= 9) carSel.selectedIndex = v;
-    });
-  }
+const carSel = document.getElementById('car');
+if (idxInput && carSel) {
+  idxInput.addEventListener('input', function () {
+    const v = parseInt(this.value);
+    if (v >= 1 && v <= 9) carSel.selectedIndex = v;
+  });
+}
 
-  const bgBtn = document.getElementById('bgBtn');
-  const colors = ['#000000', '#101010', '#1a1a1a', '#222', '#0b0b0b', '#0f0f1a'];
-  let cIndex = 0;
-  if (bgBtn) {
-    bgBtn.addEventListener('click', () => {
-      cIndex = (cIndex + 1) % colors.length;
-      document.body.style.transition = 'background 0.5s ease';
-      document.body.style.background = colors[cIndex];
-    });
+function updateClock() {
+  const now = new Date();
+  const opts = { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' };
+  const clockEl = document.getElementById('clock');
+  if (clockEl) {
+    clockEl.textContent = now.toLocaleString('en-US', opts);
   }
-
-  function updateClock() {
-    const now = new Date();
-    const opts = { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' };
-    document.getElementById('clock').textContent = now.toLocaleString('en-US', opts);
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
+}
+updateClock();
+setInterval(updateClock, 1000);
 
 document.addEventListener('keydown', e => {
   if (e.key.toLowerCase() === 'r') {
-    document.getElementById('rentForm').scrollIntoView({ behavior: 'smooth' });
+    const rentForm = document.getElementById('rentForm');
+    if (rentForm) {
+      rentForm.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 });
 
-  const clickSound = new Audio("sound/bell.mp3");
-  const successSound = new Audio("sound/booked_sound.mp3");
+const clickSound = new Audio("sound/bell.mp3");
+const successSound = new Audio("sound/booked_sound.mp3");
 
-    if (bgBtn) {
-      bgBtn.addEventListener('click', () => {
-        clickSound.currentTime = 0;
-        clickSound.play();
-      });
+    function validateRentForm() {
+      if (typeof window.auth === 'undefined') {
+        return {
+          validatePhone: function(phone) {
+            return /^\+?\d{10,15}$/.test(phone.replace(/\s/g, ''));
+          }
+        };
+      }
+      return window.auth;
     }
 
+    const auth = validateRentForm();
     const rentForm = document.getElementById('rentForm');
     if (rentForm) {
+      const nameInput = document.getElementById('name');
+      const phoneInput = document.getElementById('phone');
+      const carInput = document.getElementById('car');
+      const startInput = document.getElementById('start');
+      const endInput = document.getElementById('end');
+
+      function validateField(input, validator, errorMsg) {
+        const value = input.value.trim();
+        if (!value && input.type !== 'date') {
+          input.classList.add('is-invalid');
+          return false;
+        }
+        if (validator && !validator(value)) {
+          input.classList.add('is-invalid');
+          const feedback = input.nextElementSibling;
+          if (feedback && feedback.classList.contains('invalid-feedback')) {
+            feedback.textContent = errorMsg;
+          }
+          return false;
+        }
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+        return true;
+      }
+
+      nameInput.addEventListener('blur', function() {
+        validateField(this, null, 'Name is required');
+      });
+
+      phoneInput.addEventListener('blur', function() {
+        validateField(this, auth.validatePhone, 'Invalid phone number format (10-15 digits)');
+      });
+
+      carInput.addEventListener('change', function() {
+        validateField(this, function(val) { return val !== ''; }, 'Please select a car');
+      });
+
+      startInput.addEventListener('change', function() {
+        validateField(this, null, 'Start date is required');
+        if (endInput.value && new Date(this.value) > new Date(endInput.value)) {
+          endInput.classList.add('is-invalid');
+        }
+      });
+
+      endInput.addEventListener('change', function() {
+        validateField(this, null, 'End date is required');
+        if (startInput.value && new Date(startInput.value) > new Date(this.value)) {
+          this.classList.add('is-invalid');
+        }
+      });
+
       rentForm.addEventListener('submit', e => {
         e.preventDefault();
 
-        const name  = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const car   = document.getElementById('car').value;
-        const start = document.getElementById('start').value;
-        const end   = document.getElementById('end').value;
+        const name  = nameInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const car   = carInput.value;
+        const start = startInput.value;
+        const end   = endInput.value;
 
-        let msg = '';
-        if (!name) msg += '- Please enter your full name.\n';
-        if (!phone.match(/^\+?\d{10,}$/)) msg += '- Enter a valid phone number (at least 10 digits).\n';
-        if (!car) msg += '- Select a car.\n';
-        if (!start || !end) msg += '- Choose start and end dates.\n';
-        if (start && end && new Date(start) > new Date(end))
-          msg += '- End date must be after start date.\n';
+        let isValid = true;
+        isValid = validateField(nameInput, null, 'Name is required') && isValid;
+        isValid = validateField(phoneInput, auth.validatePhone, 'Invalid phone number format (10-15 digits)') && isValid;
+        isValid = validateField(carInput, function(val) { return val !== ''; }, 'Please select a car') && isValid;
+        isValid = validateField(startInput, null, 'Start date is required') && isValid;
+        isValid = validateField(endInput, null, 'End date is required') && isValid;
 
-        if (msg) {
-          alert('Please fix the following:\n' + msg);
+        if (start && end && new Date(start) > new Date(end)) {
+          endInput.classList.add('is-invalid');
+          alert('End date must be after start date');
+          return;
+        }
+
+        if (!isValid) {
+          alert('Please fix the errors in the form');
           return;
         }
 
         alert('✅ Booking submitted successfully! Our team will contact you soon.');
         rentForm.reset();
+        [nameInput, phoneInput, carInput, startInput, endInput].forEach(input => {
+          input.classList.remove('is-valid', 'is-invalid');
+        });
 
         successSound.currentTime = 0;
         successSound.play();
       });
     }
 
-const themeToggle = document.getElementById("themeToggle");
-
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  themeToggle.textContent = "Day Mode";
-} else {
-  document.body.classList.remove("dark-mode");
-  themeToggle.textContent = "Night Mode";
-}
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  if (document.body.classList.contains("dark-mode")) {
-    themeToggle.textContent = "Day Mode";
-    localStorage.setItem("theme", "dark");
-  } else {
-    themeToggle.textContent = "Night Mode";
-    localStorage.setItem("theme", "light");
-  }
-});
-
-
-
-    const savedColor = localStorage.getItem("bgColor");
-    if (savedColor) document.body.style.background = savedColor;
-
-    bgBtn.addEventListener("click", () => {
-      const bg = document.body.style.background;
-      localStorage.setItem("bgColor", bg);
-  });
+const savedColor = localStorage.getItem("bgColor");
+if (savedColor) document.body.style.background = savedColor;

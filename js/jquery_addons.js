@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  console.log("jQuery ready");
-
   const carList = [
     "Porsche 911", "BMW M5", "Mercedes G63",
     "Toyota Camry", "Kia Sportage", "Hyundai Tucson",
@@ -59,31 +57,6 @@ $(document).ready(function() {
     $("#scrollProgress").css("width", (s/h)*100 + "%");
   });
 
-  const counters = [
-    {selector:"#cheapBtn", label:"Cars < $100", target:6},
-    {selector:"footer", label:"Happy Clients", target:7777}
-  ];
-  counters.forEach(c=>{
-    const el = $(`<div class='text-center mt-3 text-info small counterBox'>${c.label}: <span class='counter' data-target='${c.target}'>0</span></div>`);
-    $(c.selector).after(el);
-  });
-  function animateCounters(){
-    $(".counter").each(function(){
-      const el = $(this);
-      const t = parseInt(el.data("target"));
-      $({n:0}).animate({n:t},{
-        duration:1500,
-        step:now=>el.text(Math.floor(now)),
-        complete:()=>el.text(t)
-      });
-    });
-  }
-  let done=false;
-  $(window).on("scroll",function(){
-    if(!done && $(window).scrollTop()+$(window).height()>$("footer").offset().top-100){
-      animateCounters(); done=true;
-    }
-  });
 
   function spinnerForm(id){
     $(id).on("submit", function(e){
@@ -162,13 +135,24 @@ $(document).ready(function() {
 
     setTimeout(() => {
       $("#loadingSpinner").fadeOut(300);
+      let results = 0;
       $(".card").each(function() {
         const carName = $(this).find(".card-title").text().replace(/\d+\.\s*/, "").trim();
         const car = allCars.find(c => c.name === carName);
-        if (car && car.price <= val) $(this).fadeIn(500);
+        if (car && car.price <= val) {
+          $(this).fadeIn(500);
+          results++;
+        }
       });
       $("#priceInput").val("");
       showToast("Done", "Cars up to $" + val + "/day are shown.");
+      
+      if (typeof window.auth !== 'undefined') {
+        const user = window.auth.getCurrentUser();
+        if (user) {
+          window.auth.saveSearchHistory(`Price filter: $${val}`, results);
+        }
+      }
     }, 2000);
   });
 

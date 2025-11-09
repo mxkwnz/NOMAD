@@ -1,88 +1,103 @@
-const contactForm = document.getElementById('contactForm');
+(function() {
+  function validateContactForm() {
+    if (typeof window.auth === 'undefined') {
+      return {
+        validateEmail: function(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+        validatePhone: function(phone) {
+          return /^\+?\d{10,15}$/.test(phone.replace(/\s/g, ''));
+        }
+      };
+    }
+    return window.auth;
+  }
+
+  const auth = validateContactForm();
+  const contactForm = document.getElementById('contactForm');
+  
   if (contactForm) {
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const messageInput = document.getElementById('message');
+
+    function validateField(input, validator, errorMsg) {
+      const value = input.value.trim();
+      if (!value) {
+        input.classList.add('is-invalid');
+        return false;
+      }
+      if (validator && !validator(value)) {
+        input.classList.add('is-invalid');
+        input.nextElementSibling.textContent = errorMsg;
+        return false;
+      }
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+      return true;
+    }
+
+    nameInput.addEventListener('blur', function() {
+      validateField(this, null, 'Name is required');
+    });
+
+    phoneInput.addEventListener('blur', function() {
+      validateField(this, auth.validatePhone, 'Invalid phone number format (10-15 digits)');
+    });
+
+    messageInput.addEventListener('blur', function() {
+      validateField(this, null, 'Message is required');
+    });
+
     contactForm.addEventListener('submit', e => {
       e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const msg = document.getElementById('message').value.trim();
-      let err = '';
+      
+      const name = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const msg = messageInput.value.trim();
+      
+      let isValid = true;
+      isValid = validateField(nameInput, null, 'Name is required') && isValid;
+      isValid = validateField(phoneInput, auth.validatePhone, 'Invalid phone number format (10-15 digits)') && isValid;
+      isValid = validateField(messageInput, null, 'Message is required') && isValid;
 
-      if (!name) err += '- Name is required.\n';
-      if (!phone.match(/^\+?\d{10,}$/)) err += '- Enter a valid phone number (at least 10 digits).\n';
-      if (!msg) err += '- Please enter a message.\n';
-
-      if (err) {
-        alert('Please correct:\n' + err);
+      if (!isValid) {
         return;
       }
 
       alert('✅ Message sent successfully! We will contact you soon.');
       contactForm.reset();
+      nameInput.classList.remove('is-valid');
+      phoneInput.classList.remove('is-valid');
+      messageInput.classList.remove('is-valid');
     });
   }
+})();
 
-  const bgBtn = document.getElementById('bgBtn');
-  const colors = ['#000000', '#101010', '#1a1a1a', '#222', '#0b0b0b', '#0f0f1a'];
-  let cIndex = 0;
-  if (bgBtn) {
-    bgBtn.addEventListener('click', () => {
-      cIndex = (cIndex + 1) % colors.length;
-      document.body.style.transition = 'background 0.5s ease';
-      document.body.style.background = colors[cIndex];
-    });
+function updateClock() {
+  const now = new Date();
+  const opts = { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' };
+  const clockEl = document.getElementById('clock');
+  if (clockEl) {
+    clockEl.textContent = now.toLocaleString('en-US', opts);
   }
+}
+updateClock();
+setInterval(updateClock, 1000);
 
-  function updateClock() {
-    const now = new Date();
-    const opts = { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit' };
-    document.getElementById('clock').textContent = now.toLocaleString('en-US', opts);
-  }
-  updateClock();
-  setInterval(updateClock, 1000);
-
-  const greetBox = document.createElement("div");
-  let msgTime;
-  switch (true) {
-    case new Date().getHours() < 12: msgTime = "Good morning!"; break;
-    case new Date().getHours() < 18: msgTime = "Good afternoon!"; break;
-    default: msgTime = "Good evening!";
-  }
-  greetBox.className = "text-center text-info mb-2";
-  greetBox.textContent = msgTime;
-  document.querySelector("main").prepend(greetBox);
-
-  const sndClick = new Audio("sound/bell.mp3");
-  bgBtn.addEventListener("click", () => {
-    sndClick.currentTime = 0;
-    sndClick.play();
-  });
-
-const themeToggle = document.getElementById("themeToggle");
-
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  themeToggle.textContent = "Day Mode";
-} else {
-  document.body.classList.remove("dark-mode");
-  themeToggle.textContent = "Night Mode";
+const greetBox = document.createElement("div");
+let msgTime;
+switch (true) {
+  case new Date().getHours() < 12: msgTime = "Good morning!"; break;
+  case new Date().getHours() < 18: msgTime = "Good afternoon!"; break;
+  default: msgTime = "Good evening!";
+}
+greetBox.className = "text-center text-info mb-2";
+greetBox.textContent = msgTime;
+const mainEl = document.querySelector("main");
+if (mainEl) {
+  mainEl.prepend(greetBox);
 }
 
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  if (document.body.classList.contains("dark-mode")) {
-    themeToggle.textContent = "Day Mode";
-    localStorage.setItem("theme", "dark");
-  } else {
-    themeToggle.textContent = "Night Mode";
-    localStorage.setItem("theme", "light");
-  }
-});
-
-  
-  const savedColor = localStorage.getItem("bgColor");
-    if (savedColor) document.body.style.background = savedColor;
-
-    bgBtn.addEventListener("click", () => {
-      const bg = document.body.style.background;
-      localStorage.setItem("bgColor", bg);
-  } );
+const savedColor = localStorage.getItem("bgColor");
+if (savedColor) document.body.style.background = savedColor;

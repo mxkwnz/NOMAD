@@ -1,3 +1,21 @@
+(function() {
+  function updateOffcanvasProfile() {
+    const user = window.auth.getCurrentUser();
+    const offcanvasProfile = document.getElementById('offcanvasProfile');
+    if (offcanvasProfile) {
+      offcanvasProfile.style.display = user ? 'block' : 'none';
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(updateOffcanvasProfile, 100);
+    });
+  } else {
+    setTimeout(updateOffcanvasProfile, 100);
+  }
+})();
+
 document.querySelectorAll('.faq-question').forEach(q => {
   q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
 });
@@ -6,27 +24,6 @@ const popup = document.getElementById('popupForm');
 document.getElementById('openPopup').onclick = () => popup.style.display = 'flex';
 document.getElementById('closePopup').onclick = () => popup.style.display = 'none';
 window.onclick = e => { if (e.target === popup) popup.style.display = 'none'; };
-
-const themeToggle = document.getElementById("themeToggle");
-
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  themeToggle.textContent = "Day Mode";
-} else {
-  document.body.classList.remove("dark-mode");
-  themeToggle.textContent = "Night Mode";
-}
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  if (document.body.classList.contains("dark-mode")) {
-    themeToggle.textContent = "Day Mode";
-    localStorage.setItem("theme", "dark");
-  } else {
-    themeToggle.textContent = "Night Mode";
-    localStorage.setItem("theme", "light");
-  }
-});
 
 const readMoreBtn = document.getElementById("readMoreBtn");
 const extraText = document.getElementById("extraText");

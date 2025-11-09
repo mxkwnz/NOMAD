@@ -1,41 +1,64 @@
- const orderModal = document.getElementById('orderModal');
-  orderModal?.addEventListener('show.bs.modal', function(e){
-    const btn = e.relatedTarget;
-    const car = btn?.getAttribute('data-car') || '';
-    document.getElementById('orderCar').value = car;
-  });
+const orderModal = document.getElementById('orderModal');
+orderModal?.addEventListener('show.bs.modal', function(e){
+  const btn = e.relatedTarget;
+  const car = btn?.getAttribute('data-car') || '';
+  document.getElementById('orderCar').value = car;
+});
 
-  document.getElementById('orderForm')?.addEventListener('submit', function(ev) {
+document.getElementById('orderForm')?.addEventListener('submit', function(ev) {
   ev.preventDefault();
 
+  function validateOrderForm() {
+    if (typeof window.auth === 'undefined') {
+      return {
+        validateEmail: function(email) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+        validatePhone: function(phone) {
+          return /^\+?\d{10,15}$/.test(phone.replace(/\s/g, ''));
+        }
+      };
+    }
+    return window.auth;
+  }
+
+  const auth = validateOrderForm();
   const name = document.getElementById('orderName').value.trim();
   const email = document.getElementById('orderEmail').value.trim();
   const phone = document.getElementById('orderPhone').value.trim();
-  const errorBox = document.createElement('p');
-  errorBox.style.color = 'red';
+  const nameInput = document.getElementById('orderName');
+  const emailInput = document.getElementById('orderEmail');
+  const phoneInput = document.getElementById('orderPhone');
 
-  this.querySelector('.error-box')?.remove();
+  let isValid = true;
 
-  if (!name || !email || !phone) {
-    errorBox.textContent = 'Please fill in all fields.';
-    errorBox.classList.add('error-box');
-    this.appendChild(errorBox);
-    return;
+  if (!name) {
+    nameInput.classList.add('is-invalid');
+    isValid = false;
+  } else {
+    nameInput.classList.remove('is-invalid');
+    nameInput.classList.add('is-valid');
   }
 
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    errorBox.textContent = 'Invalid email format.';
-    errorBox.classList.add('error-box');
-    this.appendChild(errorBox);
-    return;
+  if (!email || !auth.validateEmail(email)) {
+    emailInput.classList.add('is-invalid');
+    emailInput.nextElementSibling.textContent = !email ? 'Email is required' : 'Invalid email format';
+    isValid = false;
+  } else {
+    emailInput.classList.remove('is-invalid');
+    emailInput.classList.add('is-valid');
   }
 
-  const phonePattern = /^[0-9]{8,15}$/;
-  if (!phonePattern.test(phone)) {
-    errorBox.textContent = 'Phone must contain 8–15 digits.';
-    errorBox.classList.add('error-box');
-    this.appendChild(errorBox);
+  if (!phone || !auth.validatePhone(phone)) {
+    phoneInput.classList.add('is-invalid');
+    phoneInput.nextElementSibling.textContent = !phone ? 'Phone is required' : 'Invalid phone number format (10-15 digits)';
+    isValid = false;
+  } else {
+    phoneInput.classList.remove('is-invalid');
+    phoneInput.classList.add('is-valid');
+  }
+
+  if (!isValid) {
     return;
   }
 
@@ -55,8 +78,7 @@
   }, 2000);
 });
 
-
-  const greetingMsg = document.getElementById("greetingMsg");
+const greetingMsg = document.getElementById("greetingMsg");
 const hour = new Date().getHours();
 let greeting = "";
 
@@ -73,28 +95,6 @@ switch (true) {
 
 greetingMsg.textContent = greeting;
 
-const themeToggle = document.getElementById("themeToggle");
-
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  themeToggle.textContent = "Day Mode";
-} else {
-  document.body.classList.remove("dark-mode");
-  themeToggle.textContent = "Night Mode";
-}
-
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  if (document.body.classList.contains("dark-mode")) {
-    themeToggle.textContent = "Day Mode";
-    localStorage.setItem("theme", "dark");
-  } else {
-    themeToggle.textContent = "Night Mode";
-    localStorage.setItem("theme", "light");
-  }
-});
-
-
 const soundButtons = document.querySelectorAll('.sound-btn');
 
 soundButtons.forEach(button => {
@@ -105,7 +105,6 @@ soundButtons.forEach(button => {
     sound.play().catch(err => console.error('Audio play error:', err));
   });
 });
-
 
 const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 let currentIndex = 0;
@@ -136,39 +135,22 @@ window.addEventListener('scroll', () => {
 });
 
 $(document).ready(function() {
-  console.log("jQuery is ready!");
-
-  $("#searchInput").on("keyup", function() {
-    let value = $(this).val().toLowerCase();
-    $(".card").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().includes(value));
-    });
-    showSuggestions(value);
-    highlightText(value);
-  });
-
   const carNames = [
     "Porsche 911", "Lamborghini Aventador", "Bugatti Chiron", 
     "Ferrari SF90 Stradale", "Bentley Continental GT",
     "BMW M5 F90", "Mercedes G63 AMG", "Rolls-Royce Phantom", "Audi Q5"
   ];
 
-  function showSuggestions(value) {
+  window.showSuggestions = function(value) {
     $("#suggestions").empty();
     if (!value) return;
     let matches = carNames.filter(name => name.toLowerCase().includes(value));
     matches.forEach(name => {
       $("#suggestions").append(`<li class="list-group-item list-group-item-dark">${name}</li>`);
     });
-  }
+  };
 
-  $("#suggestions").on("click", "li", function() {
-    $("#searchInput").val($(this).text());
-    $("#suggestions").empty();
-    $("#searchInput").trigger("keyup");
-  });
-
-  function highlightText(keyword) {
+  window.highlightText = function(keyword) {
     $(".card-title, .card-text").each(function() {
       let text = $(this).text();
       if (!keyword) {
@@ -179,7 +161,35 @@ $(document).ready(function() {
         $(this).html(newText);
       }
     });
-  }
+  };
+
+  $("#searchInput").on("keyup", function() {
+    let value = $(this).val().toLowerCase();
+    let visibleCount = 0;
+    
+    $(".card").filter(function() {
+      const isVisible = $(this).text().toLowerCase().includes(value);
+      $(this).toggle(isVisible);
+      if (isVisible) visibleCount++;
+      return isVisible;
+    });
+    
+    showSuggestions(value);
+    highlightText(value);
+
+    if (typeof window.auth !== 'undefined') {
+      const user = window.auth.getCurrentUser();
+      if (user && value.length > 0) {
+        window.auth.saveSearchHistory(value, visibleCount);
+      }
+    }
+  });
+
+  $("#suggestions").on("click", "li", function() {
+    $("#searchInput").val($(this).text());
+    $("#suggestions").empty();
+    $("#searchInput").trigger("keyup");
+  });
 });
 
 $(window).on("scroll", function() {
@@ -191,19 +201,16 @@ $(window).on("scroll", function() {
 });
 
 $("body").append(`<div id="notification" class="alert alert-success position-fixed top-0 end-0 m-3" style="display:none; z-index:9999;"></div>`);
-  window.showNotification = function(message) {
-    $("#notification").text(message).fadeIn(300);
-    setTimeout(() => $("#notification").fadeOut(500), 3000);
-  };
+window.showNotification = function(message) {
+  $("#notification").text(message).fadeIn(300);
+  setTimeout(() => $("#notification").fadeOut(500), 3000);
+};
 
 $("#orderForm").on("submit", function () {
-  // The form validation above already handles the logic;
-  // We only need to show a success notification after submission.
   setTimeout(() => {
     showNotification("✅ Order submitted successfully!");
   }, 2100);
 });
-
 
 $(".card").each(function () {
   const title = $(this).find(".card-title");
@@ -227,7 +234,6 @@ $("body").on("click", ".copy-btn", function () {
     }, 2000);
   });
 });
-
 
 $("img.card-img-top").each(function () {
   const img = $(this);
