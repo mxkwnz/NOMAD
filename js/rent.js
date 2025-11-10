@@ -130,6 +130,70 @@ const successSound = new Audio("sound/booked_sound.mp3");
 
         successSound.currentTime = 0;
         successSound.play();
+        
+        try {
+          const current = window.auth && window.auth.getCurrentUser && window.auth.getCurrentUser();
+          if (current) {
+            const carName = car.replace(/^\d+\.\s*/, '').trim();
+
+            const PRICES = {
+              'Porsche 911': 250,
+              'BMW M5': 220,
+              'Mercedes G63': 300,
+              'Toyota Camry': 90,
+              'Kia Sportage': 80,
+              'Hyundai Tucson': 75,
+              'Lexus ES': 140,
+              'Nissan X-Trail': 70,
+              'Audi Q5': 120
+            };
+
+            // Calculate number of days between start and end
+            const startDate = new Date(start);
+            const endDate = new Date(end);
+            let ms = endDate.getTime() - startDate.getTime();
+            let days = Math.ceil(ms / (1000 * 60 * 60 * 24));
+            if (!isFinite(days) || days < 1) days = 1;
+
+            // Price calculation
+            const basePrice = PRICES[carName] || 100; 
+            const totalPrice = basePrice * days;
+
+            const usersRaw = localStorage.getItem('nomad_users') || '{}';
+            let users;
+            try { users = JSON.parse(usersRaw); } catch(e) { users = {}; }
+
+            if (!users[current.email]) {
+              users[current.email] = {
+                name: current.name || '',
+                email: current.email || '',
+                phone: current.phone || '',
+                bookings: []
+              };
+            }
+            if (!Array.isArray(users[current.email].bookings)) {
+              users[current.email].bookings = [];
+            }
+
+            users[current.email].bookings.push({
+              car: carName,
+              start: start,
+              end: end,
+              days: days,
+              price: totalPrice,
+              timestamp: new Date().toISOString()
+            });
+
+            localStorage.setItem('nomad_users', JSON.stringify(users));
+
+            const updatedUser = Object.assign({}, users[current.email]);
+            if (updatedUser.password) delete updatedUser.password;
+            localStorage.setItem('nomad_current_user', JSON.stringify(updatedUser));
+          }
+        } catch (err) {
+          console.error('Failed to save booking to profile', err);
+        }
+
       });
     }
 
